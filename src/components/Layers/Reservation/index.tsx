@@ -3,6 +3,7 @@ import { styles } from "./styles.css";
 import { globalStyles } from "@/globalStyles/index.css";
 import DetailCard from "./views/DetailCard";
 import CustomerInformation from "./views/CustomerInformation";
+import ChargeSummery from "./views/ChargeSummery";
 
 export default function Reservation() {
   return (
@@ -15,7 +16,7 @@ export default function Reservation() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-auto gap-4 lg:gap-6">
         <DetailCard />
         <CustomerInformation />
-        <DetailCard />
+        <ChargeSummery />
         <DetailCard />
         <DetailCard />
       </div>
