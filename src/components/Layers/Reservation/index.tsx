@@ -5,6 +5,7 @@ import DetailCard from "./views/DetailCard";
 import CustomerInformation from "./views/CustomerInformation";
 import ChargeSummery from "./views/ChargeSummery";
 import VehicleInformation from "./views/VehicleInformation";
+import AdditionalCharge from "./views/AdditionalCharge";
 
 export default function Reservation() {
   return (
@@ -19,7 +20,7 @@ export default function Reservation() {
         <CustomerInformation />
         <ChargeSummery />
         <VehicleInformation />
-        <DetailCard />
+        <AdditionalCharge />
       </div>
     </div>
   );
