@@ -4,6 +4,7 @@ import { globalStyles } from "@/globalStyles/index.css";
 import DetailCard from "./views/DetailCard";
 import CustomerInformation from "./views/CustomerInformation";
 import ChargeSummery from "./views/ChargeSummery";
+import VehicleInformation from "./views/VehicleInformation";
 
 export default function Reservation() {
   return (
@@ -17,7 +18,7 @@ export default function Reservation() {
         <DetailCard />
         <CustomerInformation />
         <ChargeSummery />
-        <DetailCard />
+        <VehicleInformation />
         <DetailCard />
       </div>
     </div>
