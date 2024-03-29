@@ -1,4 +1,4 @@
-import Reservation from "@/components/Views/Reservation";
+import Reservation from "@/components/Layers/Reservation";
 import React from "react";
 import { styles } from "./styles.css";
 
