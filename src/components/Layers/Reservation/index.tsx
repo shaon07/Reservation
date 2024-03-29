@@ -10,7 +10,7 @@ import AdditionalCharge from "./views/AdditionalCharge";
 export default function Reservation() {
   return (
     <div className={`${styles.container}`}>
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center justify-between mb-4">
         <h1 className={`${globalStyles.typography.h1}`}>Reservation</h1>
         <button className={`${globalStyles.button.primary}`}>Print/Download</button>
       </div>
