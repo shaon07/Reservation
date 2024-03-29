@@ -7,7 +7,8 @@ export const htmlToPdfDownloader = (id: string) => {
   html2canvas(input).then((canvas) => {
     const imgData = canvas.toDataURL("image/png");
     const pdf: any = new jsPDF();
-    pdf.addImage(imgData, "PNG", 0, 0);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, 200);
     pdf.save("downloaded-file.pdf");
   });
 };
