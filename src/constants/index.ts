@@ -1,0 +1,1 @@
+export const BASE_URL="https://exam-server-7c41747804bf.herokuapp.com"

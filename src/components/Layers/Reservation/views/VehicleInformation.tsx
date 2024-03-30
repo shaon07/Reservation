@@ -18,14 +18,34 @@ const countryOptions = [
     }
 ]
 
-export default function VehicleInformation() {
+interface VehicleInformationProps {
+  typeOptions?: any[];
+  vehicleOptions?: any[];
+}
+
+export default function VehicleInformation({typeOptions, vehicleOptions}:VehicleInformationProps) {
+
+  const vehicleTypeOptions = typeOptions?.map((item) => {
+    return {
+      label: item,
+      value: item
+    }
+  });
+
+  const vehicleOptionsMapped = vehicleOptions?.map((item) => {
+    return {
+      label: item,
+      value: item
+    }
+  })
+
   return (
     <div>
       <CardTitle text={"Vehicle Information"} className="mb-4" />
       <Card>
         <form className="max-w-sm mx-auto">
-          <SelectBox label={"Vehicle Type"} options={countryOptions} required />
-          <SelectBox label={"Vehicle"} options={countryOptions} required />
+          <SelectBox label={"Vehicle Type"} options={vehicleTypeOptions || countryOptions} required />
+          <SelectBox label={"Vehicle"} options={vehicleOptionsMapped || countryOptions} required />
         </form>
       </Card>
     </div>

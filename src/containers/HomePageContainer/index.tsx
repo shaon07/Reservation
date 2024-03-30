@@ -1,11 +1,16 @@
 import Reservation from "@/components/Layers/Reservation";
 import React from "react";
 import { styles } from "./styles.css";
+import { getCarDetail } from "@/services/api/carDetailApi";
 
-export default function HomePageContainer() {
+
+
+export default async function HomePageContainer() {
+
+  const data = await getCarDetail();
   return (
     <div className={`${styles.container}`}>
-      <Reservation />
+      <Reservation data={data} />
     </div>
   );
 }

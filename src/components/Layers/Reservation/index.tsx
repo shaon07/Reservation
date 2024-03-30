@@ -7,16 +7,27 @@ import VehicleInformation from "./views/VehicleInformation";
 import AdditionalCharge from "./views/AdditionalCharge";
 import Header from "./views/Header";
 
-export default function Reservation() {
+interface ReservationProps {
+  data?: any[];
+}
+
+export default function Reservation({ data }: ReservationProps) {
+
+  const vehicleType = [...new Set(data?.map((item) => item.type))];
+  const vehicle = [...new Set(data?.map((item) => item.model))];
+
   return (
     <div className={`${styles.container}`}>
+      <pre>
+      {JSON.stringify(data, null, 2)}
+      </pre>
       <Header />
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-auto gap-4 lg:gap-6">
         <DetailCard />
         <CustomerInformation />
         <ChargeSummery />
-        <VehicleInformation />
+        <VehicleInformation typeOptions={vehicleType} vehicleOptions={vehicle} />
         <AdditionalCharge />
       </div>
     </div>
