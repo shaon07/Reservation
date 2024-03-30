@@ -1,6 +1,6 @@
 "use client";
 
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 
 interface options {
   label: string;
@@ -34,6 +34,8 @@ export default function SelectBox({
   onFocus = () => {},
   onBlur = () => {},
 }: SelectBox) {
+  const [inputValue, setInputValue] = useState<any>("");
+
   return (
     <div className="mb-2 flex-flex-col gap-2">
       {label && (
@@ -50,15 +52,19 @@ export default function SelectBox({
       <select
         id={id}
         name={name}
+        value={inputValue}
         disabled={disabled}
-        onChange={onChange}
+        onChange={(e) => {
+          onChange(e.target.value);
+          setInputValue(e.target.value);
+        }}
         onFocus={onFocus}
         onBlur={onBlur}
         style={style}
         required
         className={`bg-gray-50 border border-[#DFDFFF] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${className}`}
       >
-        <option defaultValue={""} disabled>
+        <option value="dd">
           Choose {label}
         </option>
         {options.map((option) => (

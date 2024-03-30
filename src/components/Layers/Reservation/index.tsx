@@ -8,8 +8,6 @@ import ChargeSummery from "./views/ChargeSummery";
 import VehicleInformation from "./views/VehicleInformation";
 import AdditionalCharge from "./views/AdditionalCharge";
 import Header from "./views/Header";
-import { selectCount } from "@/lib/redux/chargeSlice";
-import { useAppSelector } from "@/lib/stateHook";
 
 interface ReservationProps {
   data?: any[];
