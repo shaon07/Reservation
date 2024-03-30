@@ -16,6 +16,7 @@ export default function AdditionalCharge({
   getData = () => {},
 }: AdditionalChargeProps) {
   const dispatch = useAppDispatch();
+  
   const [additionalCharges, setAdditionalCharges] = React.useState<any>({
     collisionDamageWaiver: 0,
     liabilityInsurance: 0,
@@ -27,6 +28,7 @@ export default function AdditionalCharge({
     dispatch(updateAdditionalCharges(additionalCharges));
   }, [additionalCharges]);
 
+  
 
   return (
     <div>

@@ -1,7 +1,38 @@
 import CardTitle from "@/components/common/CardTitle";
+import { useAppSelector } from "@/lib/stateHook";
+import { calculatePercentage } from "@/utils/calculatePercentage";
 import React from "react";
 
 export default function ChargeSummery() {
+  const fullInfo = useAppSelector((state) => state.chargeSlice);
+
+  const carDetail = fullInfo.carInfo.find(
+    (item: any) =>
+      item.type === fullInfo.vehicleType && item.model === fullInfo.vehicle
+  );
+
+  const totalDailyRate =
+    (carDetail?.rates?.daily || 0) * fullInfo?.userDetail?.duration?.inDays ||
+    0;
+
+  const totalHourlyRate = (carDetail?.rates?.hourly || 0) * fullInfo?.userDetail?.duration?.inHour || 0;
+
+  const totalWeeklyRate =
+    (carDetail?.rates?.weekly || 0) * fullInfo?.userDetail?.duration?.inWeek ||
+    0;
+
+  const waiver = fullInfo?.additionalCharges?.collisionDamageWaiver;
+  const insurance = fullInfo?.additionalCharges?.liabilityInsurance;
+  const tax = fullInfo?.additionalCharges?.rentalTax || 0;
+
+  const total =
+    totalDailyRate +
+      totalWeeklyRate +
+      waiver +
+      insurance -
+      fullInfo.userDetail.discount || 0;
+
+
   return (
     <div>
       <CardTitle text={"Charge Summery"} className="mb-4" />
@@ -29,11 +60,23 @@ export default function ChargeSummery() {
                 scope="row"
                 className="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
+                Hourly
+              </th>
+              <td className="px-6 py-4">1</td>
+              <td className="px-6 py-4">${carDetail?.rates?.hourly || 0}</td>
+              <td className="px-6 py-4">${totalHourlyRate}</td>
+            </tr>
+
+            <tr className=" dark:bg-gray-800">
+              <th
+                scope="row"
+                className="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
                 Daily
               </th>
               <td className="px-6 py-4">1</td>
-              <td className="px-6 py-4">$2999</td>
-              <td className="px-6 py-4">$2999</td>
+              <td className="px-6 py-4">${carDetail?.rates?.daily || 0}</td>
+              <td className="px-6 py-4">${totalDailyRate}</td>
             </tr>
 
             <tr className=" dark:bg-gray-800">
@@ -44,21 +87,51 @@ export default function ChargeSummery() {
                 Weekly
               </th>
               <td className="px-6 py-4">1</td>
-              <td className="px-6 py-4">$2999</td>
-              <td className="px-6 py-4">$2999</td>
+              <td className="px-6 py-4">${carDetail?.rates?.weekly || 0}</td>
+              <td className="px-6 py-4">${totalWeeklyRate}</td>
             </tr>
 
-            <tr className=" dark:bg-gray-800">
-              <th
-                scope="row"
-                className="p-4 font-medium text-sm text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Collision Damage Waiver
-              </th>
-              <td className="px-6 py-4">1</td>
-              <td className="px-6 py-4">$2999</td>
-              <td className="px-6 py-4">$2999</td>
-            </tr>
+            {!!fullInfo?.additionalCharges?.collisionDamageWaiver && (
+              <tr className=" dark:bg-gray-800">
+                <th
+                  scope="row"
+                  className="p-4 font-medium text-sm text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  Collision Damage Waiver
+                </th>
+                <td className="px-6 py-4">1</td>
+                <td className="px-6 py-4">${waiver || 0}</td>
+                <td className="px-6 py-4">${waiver || 0}</td>
+              </tr>
+            )}
+
+            {!!fullInfo?.additionalCharges?.liabilityInsurance && (
+              <tr className=" dark:bg-gray-800">
+                <th
+                  scope="row"
+                  className="p-4 font-medium text-sm text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  Liability Insurance
+                </th>
+                <td className="px-6 py-4">1</td>
+                <td className="px-6 py-4">${insurance}</td>
+                <td className="px-6 py-4">${insurance}</td>
+              </tr>
+            )}
+
+            {!!fullInfo?.additionalCharges?.rentalTax && (
+              <tr className=" dark:bg-gray-800">
+                <th
+                  scope="row"
+                  className="p-4 font-medium text-sm text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  Rental Tax
+                </th>
+                <td className="px-6 py-4">1</td>
+                <td className="px-6 py-4">{tax}%</td>
+                <td className="px-6 py-4">{tax}%</td>
+              </tr>
+            )}
           </tbody>
           <tfoot>
             <tr className="font-semibold text-gray-900 dark:text-white">
@@ -67,7 +140,9 @@ export default function ChargeSummery() {
               </th>
               <td className="px-6 py-3"></td>
               <td className="px-6 py-3"></td>
-              <td className="px-6 py-3">$21,000</td>
+              <td className="px-6 py-3">
+                ${tax ? calculatePercentage(total, tax) : total}
+              </td>
             </tr>
           </tfoot>
         </table>

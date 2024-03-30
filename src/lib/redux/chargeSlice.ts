@@ -10,6 +10,18 @@ export interface CounterState {
   };
   vehicleType: string;
   vehicle: string;
+  userDetail: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: number;
+    id: string;
+    pickupDate: string;
+    returnDate: string;
+    duration: any;
+    discount: number;
+  };
+  carInfo?: any;
 }
 
 // Define the initial state using that type
@@ -21,6 +33,18 @@ const initialState: CounterState = {
   },
   vehicleType: "",
   vehicle: "",
+  userDetail: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: 0,
+    id: "",
+    pickupDate: "",
+    returnDate: "",
+    duration: {},
+    discount: 0,
+  },
+  carInfo: [],
 };
 
 export const chargeSlice = createSlice({
@@ -35,11 +59,23 @@ export const chargeSlice = createSlice({
     },
     updateVehicle: (state, action: PayloadAction<string>) => {
       state.vehicle = action.payload;
-    }
+    },
+    updateUserDetail: (state, action) => {
+      state.userDetail = action.payload;
+    },
+    setCarInfo: (state, action) => {
+      state.carInfo = action.payload;
+    },
   },
 });
 
-export const { updateAdditionalCharges, updateVehicleType, updateVehicle} = chargeSlice.actions;
+export const {
+  updateAdditionalCharges,
+  updateVehicleType,
+  updateVehicle,
+  updateUserDetail,
+  setCarInfo,
+} = chargeSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const charges = (state: RootState) => state.chargeSlice;

@@ -14,6 +14,7 @@ interface HTMLInput {
     | "button"
     | "submit";
   label?: string;
+  value?: string | number;
   id?: string;
   name?: string;
   disabled?: boolean;
@@ -27,6 +28,7 @@ interface HTMLInput {
 
 export default function InputBox({
   type = "text",
+  value = "",
   id = "",
   name = "",
   disabled = false,
@@ -50,7 +52,7 @@ export default function InputBox({
       )}
       <input
         type={type}
-        value={inputValue}
+        value={value || inputValue}
         id={id}
         name={name}
         disabled={disabled}
