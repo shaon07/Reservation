@@ -1,6 +1,7 @@
 import { globalStyles } from "@/globalStyles/index.css";
 import Image from "next/image";
 import React from "react";
+import ChargeSummery from "../Reservation/views/ChargeSummery";
 
 export default function Invoice() {
   return (
@@ -113,7 +114,7 @@ export default function Invoice() {
               <span>Date/Time In: 01/01/2022 9:00 AM</span>
             </div>
 
-            <div className="bg-gray-300 p-4">
+            {/* <div className="bg-gray-300 p-4">
               <h2 className={`${globalStyles.typography.h1} uppercase`}>
                 Charge Summary
               </h2>
@@ -152,7 +153,8 @@ export default function Invoice() {
                 </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
+            <ChargeSummery />
 
             <div className="mt-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam neque
