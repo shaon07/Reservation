@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { styles } from "./styles.css";
 import DetailCard from "./views/DetailCard";
@@ -6,13 +8,14 @@ import ChargeSummery from "./views/ChargeSummery";
 import VehicleInformation from "./views/VehicleInformation";
 import AdditionalCharge from "./views/AdditionalCharge";
 import Header from "./views/Header";
+import { selectCount } from "@/lib/redux/chargeSlice";
+import { useAppSelector } from "@/lib/stateHook";
 
 interface ReservationProps {
   data?: any[];
 }
 
 export default function Reservation({ data }: ReservationProps) {
-
   const vehicleType = [...new Set(data?.map((item) => item.type))];
   const vehicle = [...new Set(data?.map((item) => item.model))];
 

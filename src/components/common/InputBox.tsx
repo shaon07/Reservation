@@ -58,8 +58,13 @@ export default function InputBox({
         required={required}
         autoComplete={autoComplete}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setInputValue(event.target.value);
-          onChange(event.target.value);
+          if (type === "checkbox") {
+            setInputValue(event.target.checked);
+            onChange(event.target.checked);
+          } else {
+            setInputValue(event.target.value);
+            onChange(event.target.value);
+          }
         }}
         onFocus={(event: React.FocusEvent<HTMLInputElement>) => {
           onFocus(event.target.value);
